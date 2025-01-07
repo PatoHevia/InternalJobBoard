@@ -1,0 +1,31 @@
+<%= form_with(model: @job_offer, local: true) do |form| %>
+  <% if @job_offer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@job_offer.errors.count, "error") %> prohibited this job_offer from being saved:</h2>
+      <ul>
+        <% @job_offer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title, "Título" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, "Descripción" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :requirements, "Requisitos" %>
+    <%= form.text_area :requirements %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Actualizar Oferta" %>
+  </div>
+<% end %>

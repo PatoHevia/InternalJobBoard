@@ -1,0 +1,20 @@
+<h1><%= @job_offer.title %></h1>
+<p><strong>Descripción:</strong> <%= @job_offer.description %></p>
+<p><strong>Requisitos:</strong> <%= @job_offer.requirements %></p>
+
+<% if user_signed_in? %>
+  <%= form_with url: job_offer_applications_path(@job_offer), method: :post do |f| %>
+    <%= hidden_field_tag 'application[job_offer_id]', @job_offer.id %>
+    <button type="submit" class="btn btn-primary">Postular a este puesto</button>
+  <% end %>
+<% else %>
+  <p>Debes <%= link_to "iniciar sesión", new_user_session_path %> para postular a esta oferta.</p>
+<% end %>
+
+<hr>
+
+<% if current_user&.admin? %>
+  <%= link_to "Editar esta oferta", edit_job_offer_path(@job_offer), class: "btn btn-secondary" %>
+  <%= link_to "Eliminar esta oferta", job_offer_path(@job_offer), method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar esta oferta?" }, class: "btn btn-danger" %>
+<% end %>
+<%= link_to "Volver a las ofertas de trabajo", job_offers_path, class: "btn btn-link" %>

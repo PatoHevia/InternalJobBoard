@@ -1,0 +1,13 @@
+<div>
+  <h1>Lista de Usuarios</h1>
+  <% @users.each do |user| %>
+    <div>
+      <p><%= user.name %></p>
+      <p><%= user.email %></p>
+    </div>
+  <% end %>
+</div>
+
+<% if current_user&.admin? %>
+  <%= link_to "Crear nuevo usuario", new_user_path, class: "btn btn-primary" %>
+<% end %>

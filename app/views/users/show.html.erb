@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @user %>
+
+<div>
+  <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <%= link_to "Back to users", users_path %>
+
+  <%= button_to "Destroy this user", @user, method: :delete %>
+</div>
+
+<!-- Mostrar las postulaciones -->
+<h2>Mis Postulaciones</h2>
+<% if @user.applications.any? %>
+  <% @user.applications.each do |application| %>
+    <div class="application">
+      <p><strong><%= application.job_offer.title %></strong></p>
+      <p><%= application.created_at.strftime("%d/%m/%Y") %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>No tienes postulaciones aún.</p>
+<% end %>
